@@ -1,0 +1,65 @@
+<polymer-element name="ceci-<%= name %>" extends="ceci-element" attributes="<%= attributes.join(' ') %>">
+  <template>
+    <link rel="stylesheet" href="component.css">
+    <div class="main">
+      <span class="test-value">{{ value }}</span>
+    </div>
+    <shadow></shadow>
+    <!--
+      Check the docs for information about:
+      1. Broadcasts:   http://bit.ly/1e6KiI8
+      2. Listeners:    http://bit.ly/QB9q4U
+      3. Attributes:   http://bit.ly/OaapXE
+    -->
+    <script type="text/json" id="ceci-definition">
+      {
+        "name": "<%= name %>",
+        "tags": "<%= name %>",
+        "thumbnail": "./thumbnail.png",
+        "description": "<%= description %>",
+        "broadcasts": {<% for (var i = 0; i < broadcasts.length; i++) { %>
+          "<%= broadcasts[i] %>": {
+            "label": "<%= _.humanize(broadcasts[i]) %>",
+            "description": "Description for <%= broadcasts[i] %>"
+          }<% if (broadcasts.length - i > 1) { %>,<%}%><% } %>
+        },
+        "listeners": {<% for (var i = 0; i < listeners.length; i++) { %>
+          "<%= listeners[i] %>": {
+            "label": "<%= _.humanize(listeners[i]) %>",
+            "description": "Description for <%= listeners[i] %>"
+          }<% if (listeners.length - i > 1) { %>,<%}%><% } %>
+        },
+        "attributes": {<% for (var i = 0; i < attributes.length; i++) { %>
+          "<%= attributes[i] %>": {
+            "label": "<%= _.humanize(attributes[i]) %>",
+            "description": "Description for <%= attributes[i] %>",
+            "editable": "number"
+          }<% if (attributes.length - i > 1) { %>,<%}%><% } %>
+        }
+      }
+    </script>
+  </template>
+    <script>
+      Polymer("ceci-<%= name %>", {
+        ready: function() {
+
+          // Set up values, attributes<% for (var i = 0; i < attributes.length; i++) { %>
+          this.<%= attributes[i] %> = 1;<% } %>
+
+          // Magic. Keep this
+          this.super();
+        },
+
+        // Add attributes here too<% for (var i = 0; i < attributes.length; i++) { %>
+        <%= attributes[i] %>: 1,<% } %>
+        // You can also add other custom values
+        value: 'test value',
+
+        // Add your listeners here<% for (var i = 0; i < listeners.length; i++) { %>
+        <%= listeners[i] %>: function() {
+          // Do something here
+        }<% if (listeners.length - i > 1) { %>,<%}%><% } %>
+
+      });
+    </script>
+</polymer-element>

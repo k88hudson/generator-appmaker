@@ -1,0 +1,6 @@
+{
+  "ceci-<%= name %>": "<%= name %>",
+  "ceci-<%= name %>/description": "<%= description %>",<% for (var i = 0; i < attributes.length; i++) { %>
+  "ceci-<%= name %>/attributes/<%= attributes[i] %>/label": "<%= _.humanize(attributes[i]) %>",
+  "ceci-<%= name %>/attributes/<%= attributes[i] %>/description": "Description for <%= attributes[i] %>"<% if (attributes.length - i > 1) { %>,<%}%><% } %>
+}

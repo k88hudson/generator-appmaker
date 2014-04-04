@@ -5,7 +5,7 @@ A guided yeoman generator to quickly create new components for Mozilla Appmaker.
 ### Installation
 
 ```
-[sudo] npm install -g generator-appmaker
+[sudo] npm install -g yo generator-appmaker
 ```
 
 ### Usage
